@@ -16,7 +16,7 @@ function myFunction() {
 //myFunction();
 
 //🚀🚀🚀 ⬇️ 📝 Explanation ⬇️ 📝 🚀🚀🚀: 
-
+// So assuming theres a base level understanding of functions, 'nestedFunctions' are functions that act very similarly, however their position within code is what differentiates them. nestedFunctions default to look within their scope for the variable, but then look outside of their scope (curly brackets). When this code is executed the first myFunction() is read, and then the computer looks and reads within that function. It goes within myFunctions curly brackets and logs the 'external' variable (which the nestedFunction finds outside its scope). Then it slides down lines 9-13 to which it finds the nestedFunction which gives directs the computer to line 11 where the function begins. It then logs the variable 'internal' which is defined outside of its curly brackets on line 9. This process or reading, when executed logs: "I'm outside the function" & "Hello! I'm inside myFunction!" . A key part of nestedFunctions i didn't describe, is the fact they can only be executed/referenced from their Parent Function, so if youre outside the function and don't use a correlating statement, there's no access to that nestedFunction. The other side to its exclusivity is that it is closure as well. Closure in this context means that you can reference or look within a function, but an inner/nested function can not be logged for information/variables outside its scope.
 
 
 
@@ -30,10 +30,18 @@ function myFunction() {
 💡 NOTE: you may use a for loop for this function if you wish 
 */
 
-function summation(/*Your Code Here*/) {
+function summation(x) {
+  let count = 0 
+  for(let i = x; i > 0; i --){
+    count += i;
+  }
+  return count;
   /*Your Code Here*/
 
   }
+  console.log(summation(4))
+  console.log(summation(10))
+
  
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
@@ -60,10 +68,14 @@ const zooAnimals = [
   💡 NOTE: the array returned should be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-  function animalNames(/*Your Code Here*/){
+  function animalNames(array){
+    const names = [];
+     array.forEach( element => {
+      names.push( `name: ${element.animal_name}, scientific: ${element.scientific_name}`)
+    })
     /*Your Code Here*/
+    return names
   }
-  
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoo needs a list of all their animal's names converted to lower case. 
@@ -75,10 +87,13 @@ const zooAnimals = [
   💡 NOTE: Do some research for other methods that can help help you
   */
 
-  function lowerCaseNames(/*Your Code Here*/){
+  function lowerCaseNames(zooAnimals){
     /*Your Code Here*/
+    const lowerCaseNames = []
+    return zooAnimals.map(element => element.animal_name.toLowerCase() )
+    
   }
-  
+  console.log(lowerCaseNames(zooAnimals))
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoo is concerned about animals with a lower population count. 
