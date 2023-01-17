@@ -69,12 +69,12 @@ const zooAnimals = [
   */
 
   function animalNames(array){
-    const names = [];
+    const namesArr = [];
      array.forEach( element => {
-      names.push( `name: ${element.animal_name}, scientific: ${element.scientific_name}`)
+      namesArr.push( `name: ${element.animal_name}, scientific: ${element.scientific_name}`)
     })
     /*Your Code Here*/
-    return names
+    return namesArr
   }
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
@@ -87,13 +87,13 @@ const zooAnimals = [
   💡 NOTE: Do some research for other methods that can help help you
   */
 
-  function lowerCaseNames(zooAnimals){
+  function lowerCaseNames(array){
     /*Your Code Here*/
-    const lowerCaseNames = []
-    return zooAnimals.map(element => element.animal_name.toLowerCase() )
+    const lowerCaseNamesArr = []
+    return array.map(element => element.animal_name.toLowerCase() )
     
   }
-  console.log(lowerCaseNames(zooAnimals))
+  console.log('this is lowercase', lowerCaseNames(zooAnimals))
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoo is concerned about animals with a lower population count. 
@@ -103,10 +103,12 @@ const zooAnimals = [
   3. Return this new array
   */
 
-  function lowPopulationAnimals(/*Your Code Here*/){
+  function lowPopulationAnimals(array){
     /*Your Code Here*/
+    const lowPopulationAnimalsArr = 0;
+    return array.filter(element => element.population < 5)
   }
-  
+  console.log(lowPopulationAnimals(zooAnimals))
 
   /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoo needs to know their total animal population across the United States. 
@@ -117,11 +119,14 @@ const zooAnimals = [
   💡 NOTE: Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count. Check MDN/W3Schools for syntax!
   */
 
-  function USApop(/*Your Code Here*/){
+  function USApop(array){
     /*Your Code Here*/
+    return array.reduce((acc, element) => acc + element.population, 0 )
   }
   
-  
+  console.log('question 4', USApop(zooAnimals))
+
+
   // 🦁🦁🦁 Callbacks 🦁🦁🦁  
   /* 🦁🦁🦁 Step 1: Create a higher-order function 🦁🦁🦁
   Use the higher-order function called consume to do the following:
@@ -131,8 +136,9 @@ const zooAnimals = [
     💡 NOTE: The tests for 'consume' will pass if it is created correctly and also after you correctly complete the functions 'add' and 'greeting' below in Step 2.
   */
 
-  function consume(/*Your Code Here */){
+  function consume(a, b, cb){
     /*Your Code Here */
+    return cb(a,b)
   }
  
   
@@ -143,20 +149,23 @@ const zooAnimals = [
  2. Return the sum of those numbers
  */
 
-function add(/*Your Code Here */){
+function add(a, b){
+  return a + b
     /*Your Code Here*/
   }
-
+console.log('step 2:addition ', add(1,11))
 
 /* Use multiply to do the following:
 1. Receive two numbers as an argument that are passed in from its first and second parameters
 2. Return the product of those numbers
 */
 
-function multiply(/*Your Code Here */){
+function multiply(a, b){
    /*Your Code Here */
-  }
 
+   return a* b;
+  }
+console.log(multiply(2, 3))
 
  /* Use greeting to do the following:
 1. Receive two strings (a first name and last name) as an argument that are passed in from its first and second parameters
@@ -164,16 +173,16 @@ function multiply(/*Your Code Here */){
 💡 NOTE: The string returned must match the format above or the test will not pass!
 */
 
-function greeting(/*Your Code Here */){
-   return /*Your Code Here */
+function greeting(a, b){
+   return `Hello ${a} ${b}, nice to meet you!`
   }
-  
+  console.log('task: greeting', greeting('yourname', 'yourlastname'))
   
 // 🦁🦁🦁 Step 3: Check your work by un-commenting the following calls to consume(): 🦁🦁🦁 
 // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
-// console.log(consume(2, 2, add)); // 4
-// console.log(consume(10, 16, multiply)); // 160
-// console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
+console.log(consume(2, 2, add)); // 4
+console.log(consume(10, 16, multiply)); // 160
+console.log(consume("Mary", "Poppins", greeting)); // Hello Mary Poppins, nice to meet you!
 
 
 
@@ -190,9 +199,14 @@ function greeting(/*Your Code Here */){
 - Instances of CuboidMaker should initialize `length`, `width` and `height` properties
 */
 
-function CuboidMaker(/*Your Code Here */){
+function CuboidMaker(properties){
+  this.length = properties.length;
+  this.width = properties.width;
+  this.height = properties.height;
   /*Your Code Here */
 }
+
+// console.log('task:cuboid', CuboidMaker(3))
 
 
 /* 🐴🐴🐴 Step 2: Volume Method 🐴🐴🐴
@@ -200,14 +214,18 @@ function CuboidMaker(/*Your Code Here */){
   💡 NOTE: Formula for cuboid volume: length * width * height   
 */
 
-
+CuboidMaker.prototype.volume = function(){
+  return this.length * this.height * this.width;
+}
 
 
 /* 🐴🐴🐴 Step 3: Surface Area Method 🐴🐴🐴
   Create another method called surfaceArea using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height. 
   💡 NOTE: Formula for cuboid surface area: 2 * (length * width + length * height + width * height)  
 */
-
+CuboidMaker.prototype.surfaceArea = function(){
+ return (2 * (this.length * this.width + this.length * this.height + this.width * this.height))
+}
 
 
 
@@ -215,14 +233,14 @@ function CuboidMaker(/*Your Code Here */){
   Create an object called cuboid that uses the new keyword to use our CuboidMaker constructor
   Add properties and values of length: 4, width: 5, and height: 5 to cuboid. */
 
-
+const cuboid = new CuboidMaker ({length: 4, width: 5, height: 5})
 
 
 
 // 🐴🐴🐴 Test your volume and surfaceArea methods by uncommenting the logs below: 🐴🐴🐴
 // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
-// console.log(cuboid.volume()); // 100
-// console.log(cuboid.surfaceArea()); // 130
+console.log('task cuboid 1',cuboid.volume()); // 100
+console.log('task cuboid 2',cuboid.surfaceArea()); // 130
  
 
 // 🦄🦄🦄 Topic 4: Classes 🦄🦄🦄 //
